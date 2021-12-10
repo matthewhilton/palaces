@@ -15,7 +15,7 @@ const CreateLinkForm = ({onNewLink}) => {
             })
         }
 
-        const res = await fetch('http://localhost:7071/api/RegisterAccount', options)
+        const res = await fetch(process.env.REACT_APP_PROD_API ? 'https://palaces-app-apim.azure-api.net/palaces-app/RegisterAccount' : 'http://localhost:7071/api/RegisterAccount', options)
         const json = await res.json()
 
         if(res.status === 200) {
