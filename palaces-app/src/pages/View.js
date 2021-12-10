@@ -5,10 +5,13 @@ import { useEffect } from "react"
 import PalaceCreator from '../components/PalaceCreator';
 import Edit from './Edit';
 import Play from './Play';
+import SyncButton from '../components/SyncButton';
+import { useNavigate } from "react-router-dom";
 
 const View = () => {
     const { id } = useParams();
     const [data, setData] = useRecoilState(accountAtomData)
+    const navigate = useNavigate();
 
     useEffect(async () => {
         const options = {
@@ -25,34 +28,17 @@ const View = () => {
 
         if (res.status === 200) {
             setData(json)
+        } else {
+            window.alert(json.error)
+            navigate("/")
         }
     }, [id])
 
-    const sync = async () => {
-        const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                id,
-                password: prompt("enter password"),  // TODO store password
-                places: data.places
-            })
-        }
-
-        const res = await fetch('http://localhost:7071/api/AccountDataUpdate', options)
-
-        if (res.status == 200) {
-            window.alert("Synced successfully")
-        } else {
-            window.alert("Failed to sync")
-        }
-    }
-
     return (
         <div>
-            <p> Account ID: {id} </p>
-            <button onClick={sync}>sync with cloud</button>
-
+            <SyncButton />
+            <p> Account ID: {data.id} </p>
+            <p> Palace Name: {data.name} </p>
             <Link to="edit">Edit</Link>
             <Link to="play">Play</Link>
 

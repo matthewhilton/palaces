@@ -1,18 +1,22 @@
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import View from "./pages/View";
 import Signup from "./pages/Signup";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Container } from "react-bootstrap"
+import { Navbar, Container, Nav } from "react-bootstrap"
 import Play from "./pages/Play";
 import Edit from "./pages/Edit";
+import { useRecoilState } from "recoil";
+import accountAtomData from './data/accountDataAtom';
+import SyncButton from "./components/SyncButton";
 
 function App() {
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Palaces</Navbar.Brand>
+          <Navbar.Brand href="/">Palaces</Navbar.Brand>         
         </Container>
       </Navbar>
       <Container>
