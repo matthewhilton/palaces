@@ -4,6 +4,8 @@ import View from "./pages/View";
 import Signup from "./pages/Signup";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Container } from "react-bootstrap"
+import Play from "./pages/Play";
+import Edit from "./pages/Edit";
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<Signup />} />
-          <Route path="/:id" element={<View />} />
+          <Route path="/:id/*" element={<View />} />
         </Routes>
       </Container>
     </div>
