@@ -23,7 +23,7 @@ const View = () => {
             })
         }
 
-        const res = await fetch(process.env.REACT_APP_PROD_API ? 'https://palaces-app-apim.azure-api.net/palaces-app/GetAccountData' : 'http://localhost:7071/api/GetAccountData', options)
+        const res = await fetch(process.env.REACT_APP_PROD_API ? '/api/GetAccountData' : 'http://localhost:7071/api/GetAccountData', options)
         const json = await res.json()
 
         if (res.status === 200) {

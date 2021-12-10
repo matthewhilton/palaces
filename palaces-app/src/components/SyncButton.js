@@ -15,7 +15,7 @@ const SyncButton = () => {
             })
         }
 
-        const res = await fetch(process.env.REACT_APP_PROD_API ? 'https://palaces-app-apim.azure-api.net/palaces-app/AccountDataUpdate' : 'http://localhost:7071/api/AccountDataUpdate', options)
+        const res = await fetch(process.env.REACT_APP_PROD_API ? '/api/AccountDataUpdate' : 'http://localhost:7071/api/AccountDataUpdate', options)
 
         if (res.status == 200) {
             window.alert("Synced successfully")
