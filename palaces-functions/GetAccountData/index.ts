@@ -7,11 +7,11 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     context.log('HTTP trigger function processed a request.');
 
     // Required body params
-    if(!req.body.password || !req.body.id) {
+    if(!req.body.id) {
         context.res = {
             statusCode: 500,
             body: {
-                error: "ID and Password body param required"
+                error: "ID body param required"
             }
         }
         return
@@ -33,17 +33,6 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         }
         return
     } else {
-        // Check password
-        if(existingItem.password !== req.body.password) {
-            context.res = {
-                statusCode: 401,
-                body: {
-                    error: "Invalid password"
-                }
-            }
-            return
-        }
-
         context.res = {
             body: {
                 ...existingItem
