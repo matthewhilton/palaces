@@ -11,12 +11,12 @@ import accountAtomData from './data/accountDataAtom';
 import SyncButton from "./components/SyncButton";
 
 function App() {
-
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">Palaces</Navbar.Brand>         
+        <Container fluid>
+          <Navbar.Brand href="/">Palaces</Navbar.Brand>    
+          <SyncButton />
         </Container>
       </Navbar>
       <Container>

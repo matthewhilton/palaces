@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap"
 
-const PlaceCard = ({ data, color='light' }) => (
-    <Card style={{ width: '18rem' }} border={color} bg="light" className="m-2">
+const PlaceCard = ({ data, color='light', children }) => (
+    <Card style={{ width: '18rem' }} border={color} bg="dark" className="m-2">
         <Card.Body>
             <Card.Title>{data.description}</Card.Title>
             <Card.Text>
@@ -10,6 +10,7 @@ const PlaceCard = ({ data, color='light' }) => (
             <Card.Text>
                 <p> Order: {data.order} </p>
             </Card.Text>
+            {children}
         </Card.Body>
     </Card>
 )

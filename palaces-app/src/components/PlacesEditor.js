@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import accountAtomData from '../data/accountDataAtom';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceCard from "./display/PlaceCard";
-import { Col, Container, Row, Stack } from "react-bootstrap";
+import { Button, Col, Container, Row, Stack } from "react-bootstrap";
 import { sortBy } from "lodash"
 
 const PlacesEditor = () => {
@@ -38,26 +38,26 @@ const PlacesEditor = () => {
         const newOrdering = placeToMove.order + direction
 
         // Already at bounds, do nothing
-        if(newOrdering < 0 || newOrdering > data.places.length - 1) {
+        if (newOrdering < 0 || newOrdering > data.places.length - 1) {
             return
         }
 
         // Find the one in the existing place
         const placeToSwapWith = data.places.find(place => place.order == placeToMove.order + direction)
-        
+
         // Swap their order values
         const swappedPlaces = data.places
             // Modify the one we are moving
             .map(p => p.id === placeToMove.id ? {
                 ...placeToMove,
                 order: placeToSwapWith.order
-            } : p) 
+            } : p)
             // Modify the one we are swapping with
             .map(p => p.id === placeToSwapWith.id ? {
                 ...placeToSwapWith,
                 order: placeToMove.order
             } : p)
-        
+
         const newDataState = {
             ...data,
             places: swappedPlaces
@@ -91,21 +91,26 @@ const PlacesEditor = () => {
     const places = sortBy(data.places.slice(), "order")
 
     return (
-        <div>
+        <Container>
             <h2> Places Editor </h2>
             <Container>
                 <Row>
-                    <Col>
+                    <Col className='bg-dark text-light p-3 rounded mb-3'>
                         <h3> Current Places </h3>
                         {places.map(place =>
-                            <Stack direction="horizontal">
-                                <button onClick={() => moveDirection(place.id, -1)}> Up </button>
-                                <button onClick={() => moveDirection(place.id, 1)}> Down </button>
-                                <button onClick={() => deletePlace(place.id)}> Delete </button>
-                                <PlaceCard data={place} />
-                            </Stack>)}
+                            <Stack direction="vertical">
+                                <PlaceCard data={place}>
+                                    <Stack direction="horizontal">
+                                        <Button variant="light" onClick={() => moveDirection(place.id, -1)}> ☝️ </Button>
+                                        <Button variant="light" onClick={() => moveDirection(place.id, 1)}> 👇 </Button>
+                                        <Button variant="light" onClick={() => deletePlace(place.id)}> 🗑️ </Button>
+                                    </Stack>
+                                </PlaceCard>
+                            </Stack>
+                        )}
+                        {places.length == 0 && <p> No Places </p>}
                     </Col>
-                    <Col>
+                    <Col className='bg-dark text-light p-3 rounded'>
                         <h3> New Place </h3>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <p> Where in palace </p>
@@ -120,15 +125,12 @@ const PlacesEditor = () => {
                             <p> Translation </p>
                             <input {...register("translation")} />
 
-                            <input type="submit" />
+                            <Button type="submit" className="mt-2"> Create Place </Button>
                         </form>
                     </Col>
                 </Row>
             </Container>
-
-
-
-        </div>
+        </Container>
     )
 }
 

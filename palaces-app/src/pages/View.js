@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import PalaceCreator from '../components/PalaceCreator';
 import Edit from './Edit';
 import Play from './Play';
+import { Button, Badge, Container } from "react-bootstrap"
 import SyncButton from '../components/SyncButton';
 import { useNavigate } from "react-router-dom";
 
@@ -18,8 +19,7 @@ const View = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id,
-                password: prompt("enter password"),  // TODO store password
+                id
             })
         }
 
@@ -35,18 +35,23 @@ const View = () => {
     }, [id])
 
     return (
-        <div>
-            <SyncButton />
-            <p> Account ID: {data.id} </p>
-            <p> Palace Name: {data.name} </p>
-            <Link to="edit">Edit</Link>
-            <Link to="play">Play</Link>
+        <Container>
+            <h1>🏰 {data.name} </h1>
+
+            <Badge bg="info">
+                Save this page to access your palace
+            </Badge>
+
+            <div>
+                <Link to="play"><Button>Play</Button></Link>
+                <Link to="edit"><Button variant="warning">Edit</Button></Link>
+            </div>
 
             <Routes>
                 <Route path="/edit" element={<Edit />} />
                 <Route path="/play" element={<Play />} />
             </Routes>
-        </div>
+        </Container>
     )
 }
 

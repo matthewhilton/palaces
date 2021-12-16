@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil"
 import accountAtomData from '../data/accountDataAtom';
+import { Button } from "react-bootstrap"
 
 const SyncButton = () => {
     const [data, setData] = useRecoilState(accountAtomData)
@@ -24,7 +25,7 @@ const SyncButton = () => {
         }
     }
 
-    return <button onClick={sync}>sync with cloud</button>
+    return <Button onClick={sync}>Sync with cloud</Button>
 }
 
 export default SyncButton
