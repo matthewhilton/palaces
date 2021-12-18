@@ -1,8 +1,10 @@
+import { Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import hashPassword from "../functions/hashpass";
 
 const CreateLinkForm = ({onNewLink}) => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = async data => {
         // Setup request
@@ -10,7 +12,7 @@ const CreateLinkForm = ({onNewLink}) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                password: data.password,
+                password: hashPassword(data.password),
                 name: data.name
             })
         }
@@ -23,16 +25,16 @@ const CreateLinkForm = ({onNewLink}) => {
             onNewLink(json.id)
         }
     };
+
     
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p> account name </p>
+          <p> Palace Name </p>
           <input {...register("name")} />
-          <p> coverimage </p>
-          <input {...register("coverImage")} />
-          <p> password </p>
+          <p> Password (for editing) </p>
           <input {...register("password")} />
-          <input type="submit" />
+          <br />
+          <Button type="submit"> Create Palace </Button>
         </form>
     )
 }

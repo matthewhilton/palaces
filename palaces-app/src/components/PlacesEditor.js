@@ -7,7 +7,7 @@ import { Button, Col, Container, Row, Stack } from "react-bootstrap";
 import { sortBy } from "lodash"
 
 const PlacesEditor = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const [data, setData] = useRecoilState(accountAtomData)
 
     if (!data) {
@@ -30,6 +30,7 @@ const PlacesEditor = () => {
         }
 
         setData(newDataState)
+        reset()
     };
 
     const moveDirection = (placeId, direction) => {
@@ -93,43 +94,43 @@ const PlacesEditor = () => {
     return (
         <Container>
             <h2> Places Editor </h2>
-            <Container>
-                <Row>
-                    <Col className='bg-dark text-light p-3 rounded mb-3'>
+            <Stack direction="vertical">
+                    <Container className='border p-3 rounded mb-3'>
                         <h3> Current Places </h3>
                         {places.map(place =>
                             <Stack direction="vertical">
                                 <PlaceCard data={place}>
-                                    <Stack direction="horizontal">
-                                        <Button variant="light" onClick={() => moveDirection(place.id, -1)}> ☝️ </Button>
-                                        <Button variant="light" onClick={() => moveDirection(place.id, 1)}> 👇 </Button>
-                                        <Button variant="light" onClick={() => deletePlace(place.id)}> 🗑️ </Button>
+                                    <Stack direction="horizontal" gap={2}>
+                                        <Button variant="secondary" onClick={() => moveDirection(place.id, -1)}> ☝️ </Button>
+                                        <Button variant="secondary" onClick={() => moveDirection(place.id, 1)}> 👇 </Button>
+                                        <Button variant="danger" onClick={() => deletePlace(place.id)}> 🗑️ </Button>
                                     </Stack>
                                 </PlaceCard>
                             </Stack>
                         )}
                         {places.length == 0 && <p> No Places </p>}
-                    </Col>
-                    <Col className='bg-dark text-light p-3 rounded'>
+                    </Container>
+                    <Container className='p-3 rounded border'>
                         <h3> New Place </h3>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <p> Where in palace </p>
+                            <p> Where in palace 🗺️</p>
                             <input {...register("description")} />
 
-                            <p> Mnemonic / Imagery </p>
+                            <p> Mnemonic / Imagery 👁️</p>
                             <input {...register("mnemonic")} />
 
-                            <p> Word in Foreign Language </p>
+                            <p> Word in Foreign Language 🌎</p>
                             <input {...register("foreignWord")} />
 
-                            <p> Translation </p>
+                            <p> Translation 📜 </p>
                             <input {...register("translation")} />
 
+                            <br />
                             <Button type="submit" className="mt-2"> Create Place </Button>
                         </form>
-                    </Col>
-                </Row>
-            </Container>
+                    </Container>
+                </Stack>
+           
         </Container>
     )
 }

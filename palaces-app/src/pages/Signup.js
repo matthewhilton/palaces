@@ -5,7 +5,6 @@ const Signup = () => {
     const navigate = useNavigate();
 
     return <div>
-        <h2> Signup to create palaces </h2>
         <CreateLinkForm onNewLink={(id) => navigate("/" + id)} />
         </div>
 }

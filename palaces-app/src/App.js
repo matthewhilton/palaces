@@ -9,6 +9,7 @@ import Edit from "./pages/Edit";
 import { useRecoilState } from "recoil";
 import accountAtomData from './data/accountDataAtom';
 import SyncButton from "./components/SyncButton";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       </Navbar>
       <Container>
         <Routes>
-          <Route path="/" element={<Signup />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/:id/*" element={<View />} />
         </Routes>
       </Container>

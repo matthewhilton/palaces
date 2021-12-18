@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil"
 import accountAtomData from '../data/accountDataAtom';
 import { Button } from "react-bootstrap"
+import hashPassword from "../functions/hashpass";
 
 const SyncButton = () => {
     const [data, setData] = useRecoilState(accountAtomData)
@@ -11,7 +12,7 @@ const SyncButton = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id: data.id,
-                password: prompt("enter password"),  // TODO store password
+                password: hashPassword(prompt("enter password")),  // TODO store password
                 places: data.places
             })
         }

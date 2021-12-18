@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Button } from "react-bootstrap"
 
 const Revealable = ({whenHidden, whenRevelealed}) => {
     const [revealed, setRevealed] = useState(false)
@@ -7,7 +8,7 @@ const Revealable = ({whenHidden, whenRevelealed}) => {
         setRevealed(false)
     }, [whenHidden, whenRevelealed])
 
-    return revealed ? <div> {whenHidden} {whenRevelealed} </div> : <div> <button onClick={() => setRevealed(true)}> Reveal </button> {whenHidden} </div>
+    return revealed ? <div> {whenRevelealed} </div> : <div className="mb-2"> <Button variant="secondary" onClick={() => setRevealed(true)}> Reveal </Button> {whenHidden} </div>
 }
 
 export default Revealable

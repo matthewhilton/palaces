@@ -42,6 +42,8 @@ const View = () => {
                 Save this page to access your palace
             </Badge>
 
+            <p> {data.places.length} places/cards </p> 
+
             <div>
                 <Link to="play"><Button>Play</Button></Link>
                 <Link to="edit"><Button variant="warning">Edit</Button></Link>
