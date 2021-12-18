@@ -1,6 +1,11 @@
 {
+    "routes": [
+        {
+            "route": "/example",
+            "rewrite": "/example.html"
+        }
+    ],
     "navigationFallback": {
-        "rewrite": "index.html",
-        "exclude": ["*.{svg,png,jpg,gif}","*.{css,scss}","*.js"]
-      }
+        "rewrite": "/index.html"
+    }
 }
