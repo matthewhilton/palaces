@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="/">Palaces</Navbar.Brand>    
+          <Navbar.Brand href="/">Gjennom <i> (through) </i></Navbar.Brand>    
           <SyncButton />
         </Container>
       </Navbar>

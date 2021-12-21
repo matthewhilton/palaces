@@ -97,8 +97,9 @@ const PlacesEditor = () => {
             <Stack direction="vertical">
                     <Container className='border p-3 rounded mb-3'>
                         <h3> Current Places </h3>
+                        <div className="d-flex flex-wrap">
                         {places.map(place =>
-                            <Stack direction="vertical">
+                            <Stack direction="horizontal">
                                 <PlaceCard data={place}>
                                     <Stack direction="horizontal" gap={2}>
                                         <Button variant="secondary" onClick={() => moveDirection(place.id, -1)}> ☝️ </Button>
@@ -108,6 +109,7 @@ const PlacesEditor = () => {
                                 </PlaceCard>
                             </Stack>
                         )}
+                        </div>
                         {places.length == 0 && <p> No Places </p>}
                     </Container>
                     <Container className='p-3 rounded border'>
