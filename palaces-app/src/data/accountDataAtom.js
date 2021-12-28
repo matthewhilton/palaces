@@ -6,7 +6,8 @@ const dataState = atom({
         id: undefined,
         name: undefined,
         places: [],
-        locations: []
+        locations: [],
+        checkpoint: null
     }
 })
 

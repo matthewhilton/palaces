@@ -51,6 +51,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         ...existingItem,
         id: req.body.id,
         places: req.body.places,
+        checkpoint: req.body.checkpoint || null,
     }
 
     await container.items.upsert(itemUpdate)
