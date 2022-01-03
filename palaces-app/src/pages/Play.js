@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil"
 import accountAtomData from '../data/accountDataAtom';
 import { useState } from "react"
-import { sortBy } from "lodash"
+import { sortBy, fill, concat } from "lodash"
 import PlaceQuizCard from "../components/PlaceQuizCard";
 import PlaceCard from "../components/display/PlaceCard";
 import { Alert, Badge, Button, Stack } from "react-bootstrap";
@@ -14,6 +14,9 @@ const Play = () => {
     const [responses, setResponses] = useState([])
 
     const places = sortBy(data.places, "order")
+
+    // If a checkpoint exists, fill the responses before the checkpoint with null values (skipped)
+    const gameOutcomes = data.checkpoint === null ? responses : concat(fill(Array(data.checkpoint), null), responses)
 
     const score = outcome => {
         // Record correct/incorrect
@@ -42,7 +45,7 @@ const Play = () => {
             </div>
         )
     } else {
-        return GameReview(places, responses)
+        return GameReview(places, gameOutcomes)
     }
 
 }
@@ -55,15 +58,9 @@ const GameReview = (places, outcomes) => {
             {places.map((place, i) =>
                 <div>
                     <PlaceCard data={place} showOrder={false}>
-                        {outcomes[i] ?
-                            <Badge bg='success'>
-                                Correct
-                            </Badge>
-                            :
-                            <Badge bg='danger'>
-                                Incorrect
-                            </Badge>
-                        }
+                        {outcomes[i] === null && <Badge bg='info'> Skipped </Badge>}
+                        {outcomes[i] === true && <Badge bg='success'> Correct </Badge>}
+                        {outcomes[i] === false && <Badge bg='danger'> Incorrect </Badge>}
                     </PlaceCard>
                 </div>
             )}

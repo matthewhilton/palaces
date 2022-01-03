@@ -13,7 +13,8 @@ const SyncButton = () => {
             body: JSON.stringify({
                 id: data.id,
                 password: hashPassword(prompt("enter password")),  // TODO store password
-                places: data.places
+                places: data.places,
+                checkpoint: data.checkpoint
             })
         }
 
